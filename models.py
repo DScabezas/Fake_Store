@@ -7,8 +7,6 @@ class Category(SQLModel,table=True):
     name:str
     slug:str
     image:str
-    creationAt:datetime=Field(default_factory=datetime.utcnow)
-    updatedAt:datetime=Field(default_factory=datetime.utcnow)
     products:List["Product"]=Relationship(back_populates="category")
 
 class User(SQLModel,table=True):
@@ -24,8 +22,6 @@ class Product(SQLModel,table=True):
     price:int
     description:str
     images:str
-    creationAt:datetime=Field(default_factory=datetime.utcnow)
-    updatedAt:datetime=Field(default_factory=datetime.utcnow)
     category_id:int=Field(foreign_key="category.id")
     category:Optional[Category]=Relationship(back_populates="products")
     comments:List["Comment"]=Relationship(back_populates="product")
